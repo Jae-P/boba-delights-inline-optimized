@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boba Delights | A Delightful Refreshing Escape</title>
+  <style>
+:root {
+  --bg: #fdfdfd;
+  --bg-alt: #f7fbfb;
+  --accent: #ff91a8;
+  --accent-soft: #ffe2eb;
+  --aqua: #7ee6e1;
+  --text-main: #22313c;
+  --text-muted: #6d8292;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --shadow-soft: 0 18px 50px rgba(36, 53, 65, 0.18);
+}
+*,
+*::before,
+*::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text","Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #e6fbff 0, #fdfdfd 55%);
+  color: var(--text-main);
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+.site-header {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 14px 8vw;
+  background: rgba(253, 253, 253, 0.96);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(205,221,232,0.9);
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-logo {
+  width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
+  background: #fff; box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+.brand-text h1 {
+  margin: 0; font-size: 20px;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.brand-text p { margin: 2px 0 0; font-size: 11px; color: var(--text-muted); }
+.nav { display: flex; align-items: center; gap: 18px; font-size: 14px; }
+.nav a { position: relative; color: var(--text-muted); padding-bottom: 2px; }
+.nav a::after {
+  content:""; position:absolute; left:0; bottom:-4px;
+  width:0; height:2px; border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),var(--aqua));
+  transition:width .18s ease;
+}
+.nav a:hover { color:var(--text-main); }
+.nav a:hover::after { width:100%; }
+.header-cta { font-size: 13px; }
+.btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:999px; padding:10px 20px;
+  border:1px solid transparent; font-size:14px; cursor:pointer;
+  transition:background .15s ease, box-shadow .15s ease,
+    transform .12s ease, border-color .15s ease;
+}
+.btn.primary {
+  background:linear-gradient(120deg,var(--accent),#ffb3c3);
+  color:#fff; box-shadow:0 12px 26px rgba(255,145,168,0.45);
+}
+.btn.primary:hover {
+  transform:translateY(-1px);
+  box-shadow:0 18px 40px rgba(255,145,168,0.62);
+}
+.btn.outline {
+  background:#fff; color:var(--text-main);
+  border-color:rgba(190,210,223,0.98);
+}
+.btn.outline:hover { background:#f9feff; }
+.btn.full { width:100%; }
+
+.hero {
+  display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1.1fr);
+  gap:36px; padding:38px 8vw 52px; align-items:center;
+}
+.hero-left h2 { font-size:clamp(30px,4vw,38px); margin:10px 0 12px; }
+.hero-left p { font-size:15px; max-width:520px; color:var(--text-muted); }
+.hero-badge-top {
+  display:inline-flex; padding:5px 12px; font-size:11px;
+  border-radius:999px; background:#e0fbfa; color:var(--text-main);
+  border:1px solid rgba(148,218,216,0.9);
+}
+.hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin:20px 0 14px; }
+.hero-right { display:flex; justify-content:center; }
+.hero-menu-frame {
+  background:#fff; border-radius:var(--radius-xl);
+  padding:12px; border:1px solid rgba(196,217,229,0.95);
+  box-shadow:var(--shadow-soft);
+}
+.hero-menu-image { border-radius:20px; }
+
+.section { padding:18px 8vw 26px; }
+.section-alt { background:var(--bg-alt); }
+.section-header h3 { margin:0 0 4px; font-size:20px; }
+.section-header p { margin:0; font-size:13px; color:var(--text-muted); }
+
+.menu-tabs {
+  display:inline-flex; margin-top:18px;
+  border-radius:999px; background:#fff; padding:3px;
+  box-shadow:0 10px 26px rgba(170,196,211,0.5);
+}
+.menu-tab {
+  border:none; background:transparent; padding:8px 16px;
+  border-radius:999px; font-size:13px; cursor:pointer;
+  color:var(--text-muted);
+}
+.menu-tab.active { background:var(--accent-soft); color:var(--text-main); }
+
+.menu-grid {
+  margin-top:18px;
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.menu-card {
+  background:#fff; border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-soft);
+  border:1px solid rgba(205,225,236,0.96);
+  overflow:hidden; display:flex; flex-direction:column;
+}
+.menu-image-wrap { overflow:hidden; }
+.menu-image {
+  width:100%; aspect-ratio:4/3; object-fit:cover;
+  transition:transform .18s ease;
+}
+.menu-card:hover .menu-image { transform:scale(1.04); }
+.menu-body { padding:12px 14px 10px; }
+.menu-title-row {
+  display:flex; justify-content:space-between; gap:8px; align-items:baseline;
+}
+.menu-title { margin:0; font-size:15px; font-weight:600; }
+.menu-price { font-size:14px; font-weight:600; color:var(--accent); }
+.menu-desc { margin:4px 0 8px; font-size:12px; color:var(--text-muted); }
+.menu-actions { display:flex; gap:8px; margin-top:4px; }
+.menu-actions .btn { flex:1; font-size:12px; padding-block:7px; }
+
+.order-grid {
+  margin-top:18px;
+  display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1.1fr);
+  gap:18px;
+}
+.order-card {
+  background:#fff; border-radius:var(--radius-xl);
+  padding:16px 18px 12px;
+  box-shadow:var(--shadow-soft);
+  border:1px solid rgba(205,225,236,0.96);
+  font-size:13px;
+}
+.order-card h4 { margin:0 0 4px; font-size:16px; }
+.order-buttons { margin-top:12px; display:flex; flex-direction:column; gap:10px; }
+.quick-form label { display:block; margin-bottom:8px; font-size:12px; }
+
+input,textarea {
+  width:100%; border-radius:999px;
+  border:1px solid rgba(187,210,223,0.96);
+  padding:8px 10px; margin-top:3px;
+  font-family:inherit; font-size:12px;
+}
+textarea { resize:vertical; border-radius:14px; }
+input:focus,textarea:focus {
+  outline:none; border-color:var(--aqua);
+  box-shadow:0 0 0 1px rgba(126,230,225,0.55);
+}
+.quick-result {
+  min-height:16px; margin-top:8px;
+  font-size:12px; color:var(--accent);
+}
+
+/* Slot machine */
+.slots-layout {
+  margin-top:18px;
+  display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1.05fr);
+  gap:18px;
+}
+.slots-machine {
+  background:#fff; border-radius:var(--radius-xl);
+  padding:16px 18px 14px;
+  box-shadow:var(--shadow-soft);
+  border:1px solid rgba(205,225,236,0.96);
+  text-align:center; font-size:14px;
+}
+.slots-window {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:6px; margin-bottom:10px; padding:10px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#ffe9f2,#e6fbff);
+  box-shadow:0 12px 26px rgba(170,196,211,0.9);
+}
+.slot-reel {
+  background:#fff; border-radius:14px;
+  padding-block:10px; font-size:28px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+}
+.slots-points { margin:8px 0 4px; font-size:13px; }
+.slots-message { margin:4px 0 0; font-size:12px; color:var(--text-muted); }
+.slots-side { display:flex; flex-direction:column; }
+.slot-card {
+  background:#fff; border-radius:var(--radius-xl);
+  padding:16px 18px 14px;
+  box-shadow:var(--shadow-soft);
+  border:1px solid rgba(205,225,236,0.96);
+  font-size:13px;
+}
+.slot-card ul { margin:8px 0 8px; padding-left:18px; }
+
+/* Contact & footer */
+.contact-section { padding-bottom:32px; }
+.contact-grid {
+  margin-top:18px;
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:18px;
+}
+.contact-card {
+  background:#fff; border-radius:var(--radius-xl);
+  padding:16px 18px 12px;
+  border:1px solid rgba(205,225,236,0.96);
+  box-shadow:var(--shadow-soft);
+  font-size:13px;
+}
+.contact-links {
+  list-style:none; padding-left:0; margin:8px 0 0; font-size:13px;
+}
+.contact-links li+li { margin-top:4px; }
+.site-footer {
+  border-top:1px solid rgba(205,225,236,0.96);
+  padding:12px 8vw 16px;
+  background:#fff; font-size:11px; color:var(--text-muted);
+}
+.footer-inner {
+  display:flex; flex-wrap:wrap;
+  justify-content:space-between; gap:8px;
+}
+
+/* Modal */
+.modal-overlay {
+  position:fixed; inset:0;
+  background:rgba(5,19,30,0.45);
+  display:none; align-items:center; justify-content:center;
+  z-index:60;
+}
+.modal-overlay.active { display:flex; }
+.modal-card {
+  width:min(420px,92vw); background:#fff;
+  border-radius:24px;
+  box-shadow:0 22px 70px rgba(0,0,0,0.35);
+  padding:16px 16px 18px; position:relative;
+}
+.modal-close {
+  position:absolute; top:8px; right:10px;
+  border:none; background:transparent;
+  font-size:20px; cursor:pointer; color:var(--text-muted);
+}
+.modal-image-wrap img {
+  width:100%; border-radius:18px; margin-bottom:10px;
+}
+.modal-desc {
+  font-size:13px; color:var(--text-muted);
+  margin:4px 0 8px;
+}
+.modal-price-row {
+  display:flex; justify-content:space-between;
+  align-items:center; gap:12px; margin-bottom:10px;
+}
+.modal-price { font-size:16px; font-weight:600; color:var(--accent); }
+.modal-qty-label { font-size:12px; }
+.modal-qty-label input { width:70px; border-radius:999px; }
+
+/* Cart */
+.cart-fab {
+  position:fixed; right:16px; bottom:16px; z-index:50;
+  border:none; background:#fff;
+  border-radius:999px; padding:8px 14px;
+  box-shadow:0 16px 40px rgba(26,39,51,0.45);
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:13px; cursor:pointer;
+}
+.cart-count {
+  min-width:22px; height:22px;
+  border-radius:999px; background:var(--accent);
+  color:#fff; display:inline-flex;
+  align-items:center; justify-content:center;
+  font-size:11px; font-weight:600;
+}
+.cart-panel {
+  position:fixed; inset:0; background:rgba(5,19,30,0.4);
+  display:none; z-index:55; justify-content:flex-end;
+}
+.cart-panel.active { display:flex; }
+.cart-panel-inner {
+  width:min(360px,100%); background:#fff;
+  height:100%; padding:14px 14px 16px;
+  box-shadow:-12px 0 40px rgba(0,0,0,0.35);
+  display:flex; flex-direction:column;
+}
+.cart-header {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:8px; margin-bottom:8px;
+}
+.cart-close {
+  border:none; background:transparent;
+  font-size:22px; cursor:pointer; color:var(--text-muted);
+}
+.cart-items { flex:1; overflow-y:auto; padding-right:4px; }
+.cart-item-row {
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:13px; padding-block:6px;
+  border-bottom:1px solid rgba(230,240,245,0.9);
+}
+.cart-item-main { display:flex; flex-direction:column; }
+.cart-item-name { font-weight:600; }
+.cart-item-meta { font-size:11px; color:var(--text-muted); }
+.cart-item-qty { display:flex; align-items:center; gap:4px; font-size:12px; }
+.cart-item-qty button {
+  width:20px; height:20px; border-radius:999px;
+  border:1px solid rgba(187,210,223,0.96);
+  background:#fff; cursor:pointer;
+}
+.cart-item-price { font-size:13px; font-weight:600; color:var(--accent); }
+.cart-empty { font-size:12px; color:var(--text-muted); margin-top:6px; }
+.cart-footer {
+  border-top:1px solid rgba(230,240,245,0.9);
+  padding-top:8px; font-size:12px;
+}
+.cart-total-row { display:flex; justify-content:space-between; margin-bottom:6px; }
+.cart-note { margin-top:6px; font-size:11px; color:var(--text-muted); }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .site-header { padding-inline:16px; }
+  .nav { display:none; }
+  .hero, .section, .site-footer { padding-inline:16px; }
+  .hero { grid-template-columns:1fr; }
+  .hero-right { order:-1; }
+  .menu-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .order-grid, .slots-layout, .contact-grid { grid-template-columns:1fr; }
+}
+@media (max-width: 640px) {
+  .menu-grid { grid-template-columns:1fr; }
+}
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="assets/logo/boba-delights-logo.png" alt="Boba Delights logo" class="brand-logo" />
+      <div class="brand-text">
+        <h1>Boba Delights</h1>
+        <p>A Delightful Refreshing Escape.™</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#hero">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#order">Order</a>
+      <a href="#rewards">Rewards</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#order" class="btn primary header-cta">Order Now</a>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <div class="hero-left">
+        <div class="hero-badge-top">Fresh Fruit · Milk Tea · Snacks</div>
+        <h2>Fresh, colorful boba and snacks made with real fruit and real love.</h2>
+        <p>
+          Family-owned boba tea and smoothie bar in Perris, CA. Build your drink, choose toppings,
+          and pair it with crispy gyoza or takoyaki for the perfect break.
+        </p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn primary">View Menu</a>
+          <a href="#order" class="btn outline">Order Online</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-menu-frame">
+          <img src="assets/menu/BobaDelights_MenuPoster.jpg" alt="Boba Delights pastel menu" class="hero-menu-image" />
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="section">
+      <header class="section-header">
+        <h3>Interactive Menu</h3>
+        <p>Tap a category to see drinks and snacks with photos, prices and descriptions. Add items to your cart to build your order.</p>
+      </header>
+
+      <div class="menu-tabs">
+        <button class="menu-tab active" data-category="fruit-smoothies">Fruit Smoothies</button>
+        <button class="menu-tab" data-category="milk-teas">Milk Teas</button>
+        <button class="menu-tab" data-category="ice-teas">Ice Teas</button>
+        <button class="menu-tab" data-category="snacks">Snacks</button>
+        <button class="menu-tab" data-category="toppings">Toppings</button>
+      </div>
+
+      <div class="menu-grid" id="menu-grid"></div>
+    </section>
+
+    <section id="order" class="section section-alt">
+      <header class="section-header">
+        <h3>Order Boba Delights</h3>
+        <p>Review your cart, then place your order online or in person.</p>
+      </header>
+      <div class="order-grid">
+        <div class="order-card">
+          <h4>Order Online</h4>
+          <p>Use your favorite platform to order drinks and snacks.</p>
+          <div class="order-buttons">
+            <a class="btn primary full" href="https://order.online/store/boba-delights-perris-24678055/?hideModal=true&pickup=true" target="_blank" rel="noopener">
+              Order.Online (Pickup)
+            </a>
+            <a class="btn outline full" href="https://www.doordash.com/store/boba-delights-perris-24678055/" target="_blank" rel="noopener">
+              DoorDash Delivery
+            </a>
+          </div>
+        </div>
+        <div class="order-card">
+          <h4>Quick Request (Demo)</h4>
+          <p>This form is a preview. Later you can connect it to email, WhatsApp or your POS.</p>
+          <form id="quick-order-form" class="quick-form">
+            <label>
+              Drink or Snack
+              <input type="text" name="item" placeholder="Ex. Strawberry Smoothie, Fried Gyoza" required />
+            </label>
+            <label>
+              Size / Qty
+              <input type="text" name="size" placeholder="20 oz, 1 order, etc." />
+            </label>
+            <label>
+              Notes
+              <textarea name="notes" rows="2" placeholder="Less ice, extra boba, no onion, etc."></textarea>
+            </label>
+            <button class="btn primary full" type="submit">Preview Request</button>
+          </form>
+          <p id="quick-order-result" class="quick-result"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="rewards" class="section">
+      <header class="section-header">
+        <h3>Rewards Slot Machine (Demo)</h3>
+        <p>Spin the reels, match icons and rack up points. Imagine turning them into real discounts and free snacks.</p>
+      </header>
+
+      <div class="slots-layout">
+        <div class="slots-machine">
+          <div class="slots-window">
+            <div class="slot-reel" id="reel-1">🧋</div>
+            <div class="slot-reel" id="reel-2">🍓</div>
+            <div class="slot-reel" id="reel-3">⭐</div>
+          </div>
+          <button class="btn primary full" id="spin-btn">Spin</button>
+          <p class="slots-points">Points: <span id="slot-points">0</span></p>
+          <p class="slots-message" id="slot-message">Match 2 icons for bonus · Match 3 for a big win.</p>
+        </div>
+        <div class="slots-side">
+          <div class="slot-card">
+            <h4>How it works (demo)</h4>
+            <p>Each spin gives you a chance to match your favorite Boba Delights icons like boba cups, fruit and stars.</p>
+            <ul>
+              <li>Match 2 icons → +20 pts</li>
+              <li>Match 3 icons → +60 pts</li>
+              <li>No match still gives +5 pts.</li>
+            </ul>
+            <p class="rewards-note">
+              Later, you can connect these points to a real loyalty system, where guests unlock
+              rewards like free toppings, snacks or drink upgrades.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-alt contact-section">
+      <header class="section-header">
+        <h3>Visit Boba Delights</h3>
+        <p>Located inside the Amazon Harley Knox parking lot in Perris, CA.</p>
+      </header>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h4>Location &amp; Hours</h4>
+          <p>
+            22722 Harley Knox Blvd<br />
+            Perris, CA 92570
+          </p>
+          <p>
+            Mon–Sat · 11:00 am – 7:30 pm<br />
+            (Hours may change on holidays)
+          </p>
+        </div>
+        <div class="contact-card">
+          <h4>Stay Connected</h4>
+          <p>Follow Boba Delights for new flavors, limited drops and seasonal collabs.</p>
+          <ul class="contact-links">
+            <li><a href="https://bobadelights.com/" target="_blank" rel="noopener">Official Website</a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram (add handle)</a></li>
+            <li><a href="mailto:info@bobadelights.com">info@bobadelights.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>© 2025 Boba Delights. A Delightful Refreshing Escape.™</span>
+      <span>Designed with love by Jae-P &amp; ChatGPT.</span>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="item-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="item-modal-close" aria-label="Close">×</button>
+      <div class="modal-image-wrap">
+        <img src="" alt="" id="modal-image" />
+      </div>
+      <h4 id="modal-title">Item title</h4>
+      <p id="modal-desc" class="modal-desc"></p>
+      <div class="modal-price-row">
+        <span id="modal-price" class="modal-price"></span>
+        <label class="modal-qty-label">
+          Qty
+          <input type="number" id="modal-qty" value="1" min="1" />
+        </label>
+      </div>
+      <button class="btn primary full" id="modal-add-btn">Add to Cart</button>
+    </div>
+  </div>
+
+  <button class="cart-fab" id="cart-fab">
+    🛒 <span class="cart-fab-label">Cart</span>
+    <span class="cart-count" id="cart-count">0</span>
+  </button>
+
+  <div class="cart-panel" id="cart-panel">
+    <div class="cart-panel-inner">
+      <header class="cart-header">
+        <h4>Your Order</h4>
+        <button class="cart-close" id="cart-close-btn">×</button>
+      </header>
+      <div class="cart-items" id="cart-items">
+        <p class="cart-empty">Your cart is empty. Add a drink or snack to get started.</p>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total-row">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+        </div>
+        <button class="btn primary full" id="cart-checkout-btn">Checkout / Order</button>
+        <p class="cart-note">
+          This cart is a demo. Later, you can connect it to your real checkout link, QR code
+          or POS system.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+const MENU_ITEMS = [
+  {
+    "id": "strawberry-smoothie",
+    "category": "fruit-smoothies",
+    "name": "Strawberry Smoothie",
+    "price": "$6.99",
+    "desc": "Fresh strawberry smoothie with fruit jellies and optional boba.",
+    "image": "assets/menu/BobaDelight_Strawberry.jpg"
+  },
+  {
+    "id": "mango-smoothie",
+    "category": "fruit-smoothies",
+    "name": "Mango Smoothie",
+    "price": "$6.99",
+    "desc": "Tropical mango blended smooth, perfect with classic boba.",
+    "image": "assets/menu/BobaDelight_Mango.jpg"
+  },
+  {
+    "id": "pineapple-smoothie",
+    "category": "fruit-smoothies",
+    "name": "Pineapple Smoothie",
+    "price": "$6.99",
+    "desc": "Bright pineapple smoothie, icy and refreshing.",
+    "image": "assets/menu/BobaDelight_Pineapple.jpg"
+  },
+  {
+    "id": "mixed-smoothie",
+    "category": "fruit-smoothies",
+    "name": "Mixed Fruit Smoothie",
+    "price": "$6.99",
+    "desc": "Choose from banana, kiwi, peach, lychee or watermelon flavors.",
+    "image": "assets/menu/BobaDelight_StrawberryWithBoba.jpg"
+  },
+  {
+    "id": "taro-milk-tea",
+    "category": "milk-teas",
+    "name": "Taro Milk Tea",
+    "price": "$6.99",
+    "desc": "Creamy purple taro milk tea with tapioca pearls.",
+    "image": "assets/menu/BobaDelight_ButterflyPeaTea.jpg"
+  },
+  {
+    "id": "thai-milk-tea",
+    "category": "milk-teas",
+    "name": "Thai Milk Tea",
+    "price": "$6.99",
+    "desc": "Sweet Thai-style black tea with milk and boba.",
+    "image": "assets/menu/BobaDelight_StrawberryWithBoba.jpg"
+  },
+  {
+    "id": "matcha-milk-tea",
+    "category": "milk-teas",
+    "name": "Matcha Milk Tea",
+    "price": "$6.99",
+    "desc": "Earthy matcha blended with milk and chewy boba pearls.",
+    "image": "assets/menu/BobaDelight_GreenTeaLychee.jpg"
+  },
+  {
+    "id": "brown-sugar-milk-tea",
+    "category": "milk-teas",
+    "name": "Brown Sugar Milk Tea",
+    "price": "$6.99",
+    "desc": "Brown sugar swirl with milk tea and loaded boba.",
+    "image": "assets/menu/BobaDelight_Pineapple.jpg"
+  },
+  {
+    "id": "lychee-ice-tea",
+    "category": "ice-teas",
+    "name": "Lychee Ice Tea",
+    "price": "$6.99",
+    "desc": "Chilled tea with lychee flavor and fruit pieces.",
+    "image": "assets/menu/BobaDelight_GreenTeaLychee.jpg"
+  },
+  {
+    "id": "peach-ice-tea",
+    "category": "ice-teas",
+    "name": "Peach Ice Tea",
+    "price": "$6.99",
+    "desc": "Peach flavored iced tea, light and refreshing.",
+    "image": "assets/menu/BobaDelight_GreenTeaLychee.jpg"
+  },
+  {
+    "id": "butterfly-ice-tea",
+    "category": "ice-teas",
+    "name": "Butterfly Pea Tea",
+    "price": "$6.99",
+    "desc": "Blue-purple butterfly pea tea with citrusy finish.",
+    "image": "assets/menu/BobaDelight_ButterflyPeaTea.jpg"
+  },
+  {
+    "id": "lemonade-ice-tea",
+    "category": "ice-teas",
+    "name": "Lemonade Ice Tea",
+    "price": "$6.99",
+    "desc": "Iced tea with classic lemonade twist.",
+    "image": "assets/menu/BobaDelight_Strawberry.jpg"
+  },
+  {
+    "id": "fried-gyoza",
+    "category": "snacks",
+    "name": "Pork Fried Gyoza (6 pc)",
+    "price": "$5.00",
+    "desc": "Crispy pork and veggie dumplings with dipping sauce.",
+    "image": "assets/menu/BobaDelight_FriedGyoza.jpg"
+  },
+  {
+    "id": "steamed-gyoza",
+    "category": "snacks",
+    "name": "Pork Steamed Gyoza (6 pc)",
+    "price": "$5.50",
+    "desc": "Soft steamed gyoza, juicy and savory.",
+    "image": "assets/menu/BobaDelight_SteamedGyoza.jpg"
+  },
+  {
+    "id": "beef-yakisoba",
+    "category": "snacks",
+    "name": "Beef Yakisoba",
+    "price": "$6.50",
+    "desc": "Stir fry noodles with beef, veggies and sauce.",
+    "image": "assets/menu/BobaDelight_Hero.jpg"
+  },
+  {
+    "id": "veggie-yakisoba",
+    "category": "snacks",
+    "name": "Veggie Yakisoba",
+    "price": "$6.00",
+    "desc": "Stir fry noodles with veggies, no meat.",
+    "image": "assets/menu/BobaDelight_Hero.jpg"
+  },
+  {
+    "id": "takoyaki",
+    "category": "snacks",
+    "name": "Octopus Takoyaki (5 pc)",
+    "price": "$7.50",
+    "desc": "Takoyaki balls topped with sauce, mayo and bonito flakes.",
+    "image": "assets/menu/BobaDelight_Tokoyaki.jpg"
+  },
+  {
+    "id": "rainbow-jelly",
+    "category": "toppings",
+    "name": "Rainbow Jelly",
+    "price": "+$0.75",
+    "desc": "Colorful jelly cubes with fruity flavor.",
+    "image": "assets/menu/BobaDelight_Hero.jpg"
+  },
+  {
+    "id": "lychee-jelly",
+    "category": "toppings",
+    "name": "Lychee Jelly",
+    "price": "+$0.75",
+    "desc": "Sweet lychee flavored jelly pieces.",
+    "image": "assets/menu/BobaDelight_Hero.jpg"
+  },
+  {
+    "id": "boba-crystal",
+    "category": "toppings",
+    "name": "Boba / Crystal Boba",
+    "price": "+$0.75",
+    "desc": "Classic tapioca pearls or clear crystal boba.",
+    "image": "assets/menu/BobaDelight_StrawberryWithBoba.jpg"
+  },
+  {
+    "id": "fresh-fruit-toppings",
+    "category": "toppings",
+    "name": "Fresh Fruit Toppings",
+    "price": "+$0.75",
+    "desc": "Strawberries, pineapple, mango, kiwi or watermelon.",
+    "image": "assets/menu/BobaDelight_Strawberry.jpg"
+  }
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("menu-grid");
+  const tabs = document.querySelectorAll(".menu-tab");
+
+  const itemModal = document.getElementById("item-modal");
+  const modalImg = document.getElementById("modal-image");
+  const modalTitle = document.getElementById("modal-title");
+  const modalDesc = document.getElementById("modal-desc");
+  const modalPrice = document.getElementById("modal-price");
+  const modalQty = document.getElementById("modal-qty");
+  const modalClose = document.getElementById("item-modal-close");
+  const modalAddBtn = document.getElementById("modal-add-btn");
+
+  const cartFab = document.getElementById("cart-fab");
+  const cartPanel = document.getElementById("cart-panel");
+  const cartCloseBtn = document.getElementById("cart-close-btn");
+  const cartCountEl = document.getElementById("cart-count");
+  const cartItemsEl = document.getElementById("cart-items");
+  const cartTotalEl = document.getElementById("cart-total");
+
+  const form = document.getElementById("quick-order-form");
+  const resultEl = document.getElementById("quick-order-result");
+
+  const reel1 = document.getElementById("reel-1");
+  const reel2 = document.getElementById("reel-2");
+  const reel3 = document.getElementById("reel-3");
+  const spinBtn = document.getElementById("spin-btn");
+  const slotPointsEl = document.getElementById("slot-points");
+  const slotMessageEl = document.getElementById("slot-message");
+
+  let currentModalId = null;
+  let cart = [];
+  let slotPoints = 0;
+  const SLOT_ICONS = ["🧋", "🍓", "🍍", "⭐", "🥤"];
+
+  function priceToNumber(priceStr) {
+    const num = parseFloat(String(priceStr).replace(/[^0-9.]/g, ""));
+    return isNaN(num) ? 0 : num;
+  }
+
+  function renderMenu(category) {
+    if (!grid) return;
+    grid.innerHTML = "";
+    const items = MENU_ITEMS.filter((item) => item.category === category);
+    items.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "menu-card";
+      card.innerHTML = `
+        <div class="menu-image-wrap">
+          <img src="${item.image}" alt="${item.name}" class="menu-image js-view-item" data-id="${item.id}" />
+        </div>
+        <div class="menu-body">
+          <div class="menu-title-row">
+            <h4 class="menu-title">${item.name}</h4>
+            <span class="menu-price">${item.price}</span>
+          </div>
+          <p class="menu-desc">${item.desc}</p>
+          <div class="menu-actions">
+            <button class="btn outline js-view-item" data-id="${item.id}">View</button>
+            <button class="btn primary js-add-cart" data-id="${item.id}">Add to Cart</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    grid.querySelectorAll(".js-view-item").forEach((el) => {
+      el.addEventListener("click", () => {
+        const id = el.getAttribute("data-id");
+        openItemModal(id);
+      });
+    });
+    grid.querySelectorAll(".js-add-cart").forEach((el) => {
+      el.addEventListener("click", () => {
+        const id = el.getAttribute("data-id");
+        addToCart(id, 1);
+      });
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+      renderMenu(tab.dataset.category || "fruit-smoothies");
+    });
+  });
+
+  renderMenu("fruit-smoothies");
+
+  function openItemModal(id) {
+    const item = MENU_ITEMS.find((i) => i.id === id);
+    if (!item || !itemModal) return;
+    currentModalId = id;
+    modalImg.src = item.image;
+    modalImg.alt = item.name;
+    modalTitle.textContent = item.name;
+    modalDesc.textContent = item.desc;
+    modalPrice.textContent = item.price;
+    modalQty.value = 1;
+    itemModal.classList.add("active");
+  }
+
+  function closeItemModal() {
+    if (!itemModal) return;
+    itemModal.classList.remove("active");
+    currentModalId = null;
+  }
+
+  if (modalClose) {
+    modalClose.addEventListener("click", closeItemModal);
+  }
+  if (itemModal) {
+    itemModal.addEventListener("click", (e) => {
+      if (e.target === itemModal) {
+        closeItemModal();
+      }
+    });
+  }
+  if (modalAddBtn) {
+    modalAddBtn.addEventListener("click", () => {
+      const qty = parseInt(modalQty.value || "1", 10) || 1;
+      if (currentModalId) {
+        addToCart(currentModalId, qty);
+        closeItemModal();
+      }
+    });
+  }
+
+  function updateCartUI() {
+    const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+    if (cartCountEl) cartCountEl.textContent = totalItems;
+
+    if (!cartItemsEl) return;
+    cartItemsEl.innerHTML = "";
+
+    if (cart.length === 0) {
+      const p = document.createElement("p");
+      p.className = "cart-empty";
+      p.textContent = "Your cart is empty. Add a drink or snack to get started.";
+      cartItemsEl.appendChild(p);
+    } else {
+      cart.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "cart-item-row";
+        row.innerHTML = `
+          <div class="cart-item-main">
+            <span class="cart-item-name">${item.name}</span>
+            <span class="cart-item-meta">${item.priceStr}</span>
+          </div>
+          <div class="cart-item-qty">
+            <button data-id="${item.id}" data-action="minus">-</button>
+            <span>${item.qty}</span>
+            <button data-id="${item.id}" data-action="plus">+</button>
+          </div>
+          <div class="cart-item-price">$${item.lineTotal.toFixed(2)}</div>
+        `;
+        cartItemsEl.appendChild(row);
+      });
+    }
+
+    const total = cart.reduce((sum, item) => sum + item.lineTotal, 0);
+    if (cartTotalEl) {
+      cartTotalEl.textContent = "$" + total.toFixed(2);
+    }
+
+    cartItemsEl.querySelectorAll("button[data-id]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-id");
+        const action = btn.getAttribute("data-action");
+        const cartItem = cart.find((c) => c.id === id);
+        if (!cartItem) return;
+        if (action === "plus") {
+          cartItem.qty += 1;
+        } else if (action === "minus") {
+          cartItem.qty -= 1;
+          if (cartItem.qty <= 0) {
+            cart = cart.filter((c) => c.id !== id);
+          }
+        }
+        cartItem.lineTotal = cartItem.qty * cartItem.price;
+        updateCartUI();
+      });
+    });
+  }
+
+  function addToCart(id, qty) {
+    const item = MENU_ITEMS.find((i) => i.id === id);
+    if (!item) return;
+    const quantity = qty || 1;
+    const price = priceToNumber(item.price);
+    let cartItem = cart.find((c) => c.id === id);
+    if (!cartItem) {
+      cartItem = {
+        id: item.id,
+        name: item.name,
+        price,
+        priceStr: item.price,
+        qty: 0,
+        lineTotal: 0,
+      };
+      cart.push(cartItem);
+    }
+    cartItem.qty += quantity;
+    cartItem.lineTotal = cartItem.price * cartItem.qty;
+    updateCartUI();
+    openCartPanel();
+  }
+
+  function openCartPanel() {
+    if (cartPanel) cartPanel.classList.add("active");
+  }
+
+  function closeCartPanel() {
+    if (cartPanel) cartPanel.classList.remove("active");
+  }
+
+  if (cartFab) {
+    cartFab.addEventListener("click", openCartPanel);
+  }
+  if (cartCloseBtn) {
+    cartCloseBtn.addEventListener("click", closeCartPanel);
+  }
+  if (cartPanel) {
+    cartPanel.addEventListener("click", (e) => {
+      if (e.target === cartPanel) closeCartPanel();
+    });
+  }
+
+  if (form && resultEl) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const item = data.get("item");
+      const size = data.get("size");
+      const notes = data.get("notes");
+      let preview = `Preview: ${item || "Item"}`;
+      if (size) preview += ` · ${size}`;
+      if (notes) preview += `. Notes: ${notes}`;
+      resultEl.textContent =
+        preview + " — Later you can connect this to email, WhatsApp, or your POS system.";
+    });
+  }
+
+  function updateSlotsDisplay(a, b, c) {
+    if (reel1) reel1.textContent = a;
+    if (reel2) reel2.textContent = b;
+    if (reel3) reel3.textContent = c;
+  }
+
+  function setSlotMessage(msg) {
+    if (slotMessageEl) slotMessageEl.textContent = msg;
+  }
+
+  function spinOnce() {
+    const a = SLOT_ICONS[Math.floor(Math.random() * SLOT_ICONS.length)];
+    const b = SLOT_ICONS[Math.floor(Math.random() * SLOT_ICONS.length)];
+    const c = SLOT_ICONS[Math.floor(Math.random() * SLOT_ICONS.length)];
+    updateSlotsDisplay(a, b, c);
+
+    let roundPoints = 0;
+    if (a === b && b === c) {
+      roundPoints = 60;
+      setSlotMessage("JACKPOT! Triple match — +60 pts.");
+    } else if (a === b || a === c || b === c) {
+      roundPoints = 20;
+      setSlotMessage("Nice match! +20 pts.");
+    } else {
+      roundPoints = 5;
+      setSlotMessage("No match, but you still earned +5 pts.");
+    }
+    slotPoints += roundPoints;
+    if (slotPointsEl) {
+      slotPointsEl.textContent = slotPoints;
+    }
+  }
+
+  if (spinBtn) {
+    spinBtn.addEventListener("click", () => {
+      spinBtn.disabled = true;
+      setSlotMessage("Spinning...");
+      let ticks = 0;
+      const maxTicks = 10;
+      const interval = setInterval(() => {
+        const a = SLOT_ICONS[Math.floor(Math.random() * SLOT_ICONS.length)];
+        const b = SLOT_ICONS[Math.floor(Math.random() * SLOT_ICONS.length)];
+        const c = SLOT_ICONS[Math.floor(Math.random() * SLOT_ICONS.length)];
+        updateSlotsDisplay(a, b, c);
+        ticks += 1;
+        if (ticks >= maxTicks) {
+          clearInterval(interval);
+          spinBtn.disabled = false;
+          spinOnce();
+        }
+      }, 70);
+    });
+  }
+});
+
+  </script>
+</body>
+</html>
